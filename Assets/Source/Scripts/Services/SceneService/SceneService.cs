@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ namespace Source.Scripts.Services.SceneService
             _sceneConfig =  sceneConfig;
         }
         
-        public void ChangeScene(SceneType type)
+        public async UniTask ChangeScene(SceneType type)
         {
             if (_sceneConfig.TryGetSceneAsset(type, out var scenePath) == false)
             {
@@ -20,7 +21,7 @@ namespace Source.Scripts.Services.SceneService
                 return;
             }
 
-            SceneManager.LoadScene(scenePath);
+            await SceneManager.LoadSceneAsync(scenePath);
         }
     }
 }

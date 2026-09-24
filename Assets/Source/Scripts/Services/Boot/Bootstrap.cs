@@ -1,38 +1,43 @@
+using Cysharp.Threading.Tasks;
 using Source.Scripts.Services.SceneService;
-using Unity.VisualScripting;
+using Source.Scripts.UI.LoadingScreen;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 namespace Source.Scripts.Services.Boot
 {
     public class Bootstrap : MonoBehaviour
     {
-        
         [SerializeField] private BootstrapConfig _bootConfig;
         private ISceneService _sceneService;
+        private LoadingScreenProvider _loadingScreenProvider;
 
         [Inject]
-        public void Configure(ISceneService sceneService)
+        public void Configure(ISceneService sceneService, LoadingScreenProvider loadingScreenProvider)
         {
             _sceneService =  sceneService;
+            _loadingScreenProvider =  loadingScreenProvider;
             Debug.Log($"[{nameof(Bootstrap)}] Configured.");
-            Boot();
+            Boot().Forget();
         }
 
-        private void Boot()
+        private async UniTaskVoid Boot()
         {
             Debug.Log($"[{nameof(Bootstrap)}] Initializing...");
-            Application.targetFrameRate = _bootConfig.initialFrameRate;
-            LoadMainMenu();
+            await _loadingScreenProvider.ShowLoadingScreen();
+            ApplySettings();
+            LoadMainMenu().Forget();
         }
 
-        private void LoadMainMenu()
+        private async UniTaskVoid LoadMainMenu()
         {
-            /*var sceneName = SceneManager.GetSceneByBuildIndex(_bootConfig.targetSceneIndex);
-            Debug.Log("Loading scene is "+sceneName);
-            SceneManager.LoadScene(_bootConfig.targetSceneIndex);*/
-            _sceneService.ChangeScene(SceneType.GameLevel);
+           await _sceneService.ChangeScene(SceneType.GameLevel);
+           _loadingScreenProvider.HideLoadingScreen().Forget();
+        }
+
+        private void ApplySettings()
+        {
+            Application.targetFrameRate = _bootConfig.initialFrameRate;
         }
     }
 }
