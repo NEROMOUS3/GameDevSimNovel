@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace Source.Scripts.Services.Boot
@@ -7,6 +6,5 @@ namespace Source.Scripts.Services.Boot
     public class BootstrapConfig : ScriptableObject
     {
         public int initialFrameRate = 60;
-        public int targetSceneIndex = 1;
     }
 }

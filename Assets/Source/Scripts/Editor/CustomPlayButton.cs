@@ -25,6 +25,8 @@ namespace Source.Scripts.Editor
 
         static void StartFromScene(string scenePath)
         {
+            if(EditorApplication.isPlaying) return;
+            
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
             
             var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
