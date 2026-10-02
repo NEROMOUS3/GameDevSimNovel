@@ -13,12 +13,12 @@ namespace Source.Scripts.DI
    {
       [SerializeField] private LoadingScreenView _loadingScreenView;
       [SerializeField] private SceneConfig _sceneConfig;
-      [SerializeField] private DefaultGameSettingsConfig _defaultSettingsConfigConfig;
+      [SerializeField] private DefaultGameSettingsConfig _defaultSettingsConfig;
       
       protected override void Configure(IContainerBuilder builder)
       {
          builder.RegisterEntryPoint<SavingService>().As<ISavingService>();
-         builder.RegisterEntryPoint<SettingsService>().As<ISettingsProvider>().WithParameter(_defaultSettingsConfigConfig);
+         builder.RegisterEntryPoint<SettingsService>().As<ISettingsProvider>().WithParameter(_defaultSettingsConfig);
        
          builder.Register<ISceneService,SceneService>(Lifetime.Singleton).WithParameter(_sceneConfig);
          builder.Register<LoadingScreenProvider>(Lifetime.Singleton).WithParameter(_loadingScreenView);

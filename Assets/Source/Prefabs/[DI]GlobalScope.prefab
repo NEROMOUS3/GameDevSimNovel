@@ -153,7 +153,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _loadingScreenView: {fileID: 597767121924743719}
   _sceneConfig: {fileID: 11400000, guid: 98bd0c2134136204badaf38e087a2879, type: 2}
-  _defaultSettingsConfigConfig: {fileID: 11400000, guid: ab583e8bfc3008449a70ce90a42f7ba5, type: 2}
+  _defaultSettingsConfig: {fileID: 11400000, guid: ab583e8bfc3008449a70ce90a42f7ba5, type: 2}
 --- !u!1001 &4982133768785010427
 PrefabInstance:
   m_ObjectHideFlags: 0

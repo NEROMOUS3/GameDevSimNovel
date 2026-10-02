@@ -25,26 +25,25 @@ namespace Source.Scripts.Services
             _loadingScreenProvider = loadingScreenProvider;
             _settingsProvider = settingsProvider;
         }
+        
+        public void Initialize()
+        {
+            Debug.Log($"[{nameof(GameBootstrap)}] {nameof(Initialize)}");
+            Boot().Forget();
+        }
 
         private async UniTaskVoid Boot()
         {
             await _savingService.Initialized.Task;
             await _settingsProvider.Initialized.Task;
             await _loadingScreenProvider.ShowLoadingScreen();
-            Debug.Log($"[{nameof(GameBootstrap)}] Boot Completed.");
+            Debug.Log($"[{nameof(GameBootstrap)}] Boot complete.");
             LoadMainMenu().Forget();
         }
 
         private async UniTaskVoid LoadMainMenu()
         {
             await _sceneService.ChangeScene(SceneType.MainMenu);
-        }
-        
-
-        public void Initialize()
-        {
-            Debug.Log($"[{nameof(GameBootstrap)}] Initializing...");
-            Boot().Forget();
         }
     }
 }
