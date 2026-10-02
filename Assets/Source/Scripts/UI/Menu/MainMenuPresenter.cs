@@ -22,7 +22,7 @@ namespace Source.Scripts.UI.Menu
 
         public void Initialize()
         {
-            Debug.Log($"Initializing {nameof(MainMenuPresenter)}");
+            Debug.Log($"{nameof(MainMenuPresenter)} initializing.");
             _view.MenuActionPerformed += HandleAction;
             EnableMainMenu().Forget();
         }
@@ -35,7 +35,7 @@ namespace Source.Scripts.UI.Menu
         
         public void Dispose()
         {
-            _view.MenuActionPerformed += HandleAction;
+            _view.MenuActionPerformed -= HandleAction;
         }
 
         private void HandleAction(MainMenuAction actionType)

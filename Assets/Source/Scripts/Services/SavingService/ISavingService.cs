@@ -1,7 +1,6 @@
 namespace Source.Scripts.Services.SavingService
 {
-    public interface ISavingService
+    public interface ISavingService: IInitializationAwaiter
     {
-        
     }
 }

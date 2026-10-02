@@ -1,4 +1,7 @@
+using Source.Scripts.Services;
+using Source.Scripts.Services.SavingService;
 using Source.Scripts.Services.SceneService;
+using Source.Scripts.Services.Settings;
 using Source.Scripts.UI.LoadingScreen;
 using UnityEngine;
 using VContainer;
@@ -10,11 +13,17 @@ namespace Source.Scripts.DI
    {
       [SerializeField] private LoadingScreenView _loadingScreenView;
       [SerializeField] private SceneConfig _sceneConfig;
+      [SerializeField] private DefaultGameSettingsConfig _defaultSettingsConfigConfig;
       
       protected override void Configure(IContainerBuilder builder)
       {
+         builder.RegisterEntryPoint<SavingService>().As<ISavingService>();
+         builder.RegisterEntryPoint<SettingsService>().As<ISettingsProvider>().WithParameter(_defaultSettingsConfigConfig);
+       
          builder.Register<ISceneService,SceneService>(Lifetime.Singleton).WithParameter(_sceneConfig);
          builder.Register<LoadingScreenProvider>(Lifetime.Singleton).WithParameter(_loadingScreenView);
+       
+         builder.RegisterEntryPoint<GameBootstrap>();
          
          Debug.Log($"[{nameof(GameGlobalScope)}] Initialized.");
       }
