@@ -23,7 +23,7 @@ namespace Source.Scripts.UI.LoadingScreen
         public async UniTask Hide()
         {
             _animationTween?.Kill();
-            _animationTween = _canvasGroup.DOFade(0, _speed).SetEase(_showEase);
+            _animationTween = _canvasGroup.DOFade(0, _speed).SetEase(_hideEase);
             await _animationTween.AsyncWaitForCompletion();
             gameObject.SetActive(false);
         }

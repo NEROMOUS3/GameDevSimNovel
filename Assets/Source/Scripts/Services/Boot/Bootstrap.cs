@@ -31,8 +31,7 @@ namespace Source.Scripts.Services.Boot
 
         private async UniTaskVoid LoadMainMenu()
         {
-           await _sceneService.ChangeScene(SceneType.GameLevel);
-           _loadingScreenProvider.HideLoadingScreen().Forget();
+           await _sceneService.ChangeScene(SceneType.MainMenu);
         }
 
         private void ApplySettings()
