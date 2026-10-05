@@ -29,6 +29,7 @@ namespace Source.Scripts.UI.Menu
 
         private async UniTaskVoid EnableMainMenu()
         {
+            await _loadingScreenProvider.GetAwaiter();
             await _loadingScreenProvider.HideLoadingScreen();
             _view.Enable();
         }

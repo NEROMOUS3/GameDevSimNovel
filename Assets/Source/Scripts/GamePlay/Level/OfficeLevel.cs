@@ -21,7 +21,13 @@ namespace Source.Scripts.GamePlay.Level
 
       public void Start()
       {
-         _loadingScreenProvider.HideLoadingScreen().Forget();
+         EnabLeLevel().Forget();
+      }
+
+      private async UniTaskVoid EnabLeLevel()
+      {
+         await _loadingScreenProvider.GetAwaiter();
+         await _loadingScreenProvider.HideLoadingScreen();
       }
    }
 }
