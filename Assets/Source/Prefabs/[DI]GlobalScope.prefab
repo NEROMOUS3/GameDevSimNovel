@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2218702723526707719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3404984021730334587}
+  m_Layer: 0
+  m_Name: '[Audio] Container'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3404984021730334587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218702723526707719}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7701744750916413147}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4262066423233065305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ GameObject:
   - component: {fileID: 8551953649358187868}
   - component: {fileID: 6371941770594689952}
   m_Layer: 0
-  m_Name: UI
+  m_Name: '[UI] Overlap canvas'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,6 +164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6900045827569597418}
+  - {fileID: 3404984021730334587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &909826323280048138
@@ -154,6 +186,7 @@ MonoBehaviour:
   _loadingScreenView: {fileID: 597767121924743719}
   _sceneConfig: {fileID: 11400000, guid: 98bd0c2134136204badaf38e087a2879, type: 2}
   _defaultSettingsConfig: {fileID: 11400000, guid: ab583e8bfc3008449a70ce90a42f7ba5, type: 2}
+  _audioContainer: {fileID: 3404984021730334587}
 --- !u!1001 &4982133768785010427
 PrefabInstance:
   m_ObjectHideFlags: 0

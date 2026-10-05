@@ -1,6 +1,6 @@
 namespace Source.Scripts.Services.AudioService
 {
-    public interface IAudioService
+    public interface IAudioService: IInitializationAwaiter
     {
         void ChangeAudioVolume(AudioType type, float volume);
         public void PlayAudio(string soundName);

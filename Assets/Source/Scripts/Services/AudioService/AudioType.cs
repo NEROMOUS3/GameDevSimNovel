@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class AudioType
+public enum AudioType
 {
-    
+    GlobalVolume,
+    MusicVolume,
+    SFXVolume,
 }

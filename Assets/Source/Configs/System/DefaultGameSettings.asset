@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: DefaultGameSettings
   m_EditorClassIdentifier: Assembly-CSharp::Source.Scripts.Services.Settings.DefaultGameSettings
   <WindowMode>k__BackingField: 0
+  <ScreenResolution>k__BackingField: {x: 720, y: 480}
   <MaxFrameRate>k__BackingField: 60
   <Vsync>k__BackingField: 1
   <GlobalVolume>k__BackingField: 1
   <MusicVolume>k__BackingField: 1
-  <VFXVolume>k__BackingField: 0
+  <SfxVolume>k__BackingField: 0
   <NSFW>k__BackingField: 0
