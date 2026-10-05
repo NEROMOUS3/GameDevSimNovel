@@ -1,4 +1,5 @@
 using UnityEngine;
+using AudioType = Source.Scripts.Services.AudioService.AudioType;
 
 namespace Source.Scripts.Services.Settings
 {

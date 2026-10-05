@@ -1,8 +1,9 @@
-using UnityEngine;
-
-public enum AudioType
+namespace Source.Scripts.Services.AudioService
 {
-    GlobalVolume,
-    MusicVolume,
-    SFXVolume,
+    public enum AudioType
+    {
+        GlobalVolume,
+        MusicVolume,
+        SfxVolume,
+    }
 }

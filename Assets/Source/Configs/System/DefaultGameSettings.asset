@@ -15,8 +15,8 @@ MonoBehaviour:
   <WindowMode>k__BackingField: 0
   <ScreenResolution>k__BackingField: {x: 720, y: 480}
   <MaxFrameRate>k__BackingField: 60
-  <Vsync>k__BackingField: 1
+  <Vsync>k__BackingField: 0
   <GlobalVolume>k__BackingField: 1
   <MusicVolume>k__BackingField: 1
-  <SfxVolume>k__BackingField: 0
+  <SfxVolume>k__BackingField: 1
   <NSFW>k__BackingField: 0

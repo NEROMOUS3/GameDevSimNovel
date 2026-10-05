@@ -5,6 +5,7 @@ using Source.Scripts.Services.SavingService.SaveContainers;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using AudioType = Source.Scripts.Services.AudioService.AudioType;
 
 namespace Source.Scripts.Services.Settings
 {
@@ -79,7 +80,7 @@ namespace Source.Scripts.Services.Settings
                     _settingsSaveContainer.MusicVolume = volume;
                     break;
                 }
-                case AudioType.SFXVolume:
+                case AudioType.SfxVolume:
                 {
                     _settingsSaveContainer.SfxVolume = volume;
                     break;
@@ -111,7 +112,7 @@ namespace Source.Scripts.Services.Settings
             SetVsync(_defaultGameSettingsConfig.Vsync);
             SetVolume(AudioType.GlobalVolume, _defaultGameSettingsConfig.GlobalVolume);
             SetVolume(AudioType.MusicVolume, _defaultGameSettingsConfig.MusicVolume);
-            SetVolume(AudioType.SFXVolume, _defaultGameSettingsConfig.SfxVolume);
+            SetVolume(AudioType.SfxVolume, _defaultGameSettingsConfig.SfxVolume);
             SetNSFW(_defaultGameSettingsConfig.NSFW);
 
             _savingService.Save(SavePath.GAME_SETTINGS, _settingsSaveContainer);
@@ -132,7 +133,7 @@ namespace Source.Scripts.Services.Settings
             SetVsync(_settingsSaveContainer.Vsync);
             SetVolume(AudioType.GlobalVolume, _settingsSaveContainer.GlobalVolume);
             SetVolume(AudioType.MusicVolume, _settingsSaveContainer.MusicVolume);
-            SetVolume(AudioType.SFXVolume, _settingsSaveContainer.SfxVolume);
+            SetVolume(AudioType.SfxVolume, _settingsSaveContainer.SfxVolume);
             SetNSFW(_settingsSaveContainer.NSFW);
 
             _isInitialized.TrySetResult();

@@ -32,7 +32,7 @@ namespace Source.Scripts.Services.AudioService
                 case AudioType.MusicVolume:
                     _musicVolume = volume;
                     break;
-                case AudioType.SFXVolume:
+                case AudioType.SfxVolume:
                     _sfxVolume = volume;
                     break;
             }
