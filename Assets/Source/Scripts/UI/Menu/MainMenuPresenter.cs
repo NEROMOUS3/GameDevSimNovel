@@ -48,7 +48,7 @@ namespace Source.Scripts.UI.Menu
                     Application.Quit();
                     break;
                 }
-                case MainMenuAction.Play:
+                case MainMenuAction.NewGame:
                 {
                     _view.Disable();
                     LoadGameScene().Forget();

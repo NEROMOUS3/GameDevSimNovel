@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 9085517833174751319}
   - component: {fileID: 1233627337457005379}
   m_Layer: 0
-  m_Name: LoadScreen
+  m_Name: LoadScreenView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

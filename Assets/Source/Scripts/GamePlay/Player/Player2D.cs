@@ -11,31 +11,26 @@ namespace Source.Scripts.GamePlay.Player
         [SerializeField] private MovementComponent2D _movementComponent2D;
         [SerializeField] private InteractableFinder _finder;
 
-        public void Start()
-        {
-            Enable();
-        }
-
         public void Enable()
         {
             _interactionInputReference.action.performed += Interact; 
-            
             _movementComponent2D.Enable();
             _finder.Enable();
             _interactionInputReference.action.Enable();
         }
-
-        private void Interact(InputAction.CallbackContext obj)
-        {
-            Debug.Log("Interact" +obj.phase);
-        }
-
-        private void Disable()
+        
+        public void Disable()
         {
             _movementComponent2D.Disable();
             _finder.Disable();
             _interactionInputReference.action.performed -= Interact;
             _interactionInputReference.action.Disable();
+        }
+        
+
+        private void Interact(InputAction.CallbackContext obj)
+        {
+            Debug.Log("Interact" +obj.phase);
         }
     }
 }

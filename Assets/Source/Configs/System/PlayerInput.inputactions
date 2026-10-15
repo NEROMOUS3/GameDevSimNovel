@@ -150,6 +150,35 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "8818735e-8897-43f5-a1b7-b42c105874f5",
+            "actions": [
+                {
+                    "name": "BackButton",
+                    "type": "Button",
+                    "id": "4e014d39-9b0d-4548-aeb8-e8cdcd1ce49d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "36d9409a-f036-4282-9aed-91dc7c52a66c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "BackButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

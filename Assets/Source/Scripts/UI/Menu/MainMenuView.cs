@@ -4,10 +4,18 @@ using UnityEngine.UI;
 
 namespace Source.Scripts.UI.Menu
 {
+    public enum MainMenuAction
+    {
+        NewGame,
+        Continue,
+        Settings,
+        Quit
+    }
+
     public class MainMenuView : MonoBehaviour
     {
         public event Action<MainMenuAction> MenuActionPerformed;
-        
+
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _continue;
         [SerializeField] private Button _settings;
@@ -46,34 +54,27 @@ namespace Source.Scripts.UI.Menu
 
         private void OnSettingsButtonClicked()
         {
-            if(!_active) return;
+            if (!_active) return;
             MenuActionPerformed?.Invoke(MainMenuAction.Settings);
         }
 
         private void OnContinueButtonClicked()
         {
-            if(!_active) return;
-            MenuActionPerformed?.Invoke(MainMenuAction.Continue);
+            if (!_active) return;
+            //MenuActionPerformed?.Invoke(MainMenuAction.Continue);
+            MenuActionPerformed?.Invoke(MainMenuAction.NewGame);
         }
 
         private void OnQuitButtonClicked()
         {
-            if(!_active) return;
+            if (!_active) return;
             MenuActionPerformed?.Invoke(MainMenuAction.Quit);
         }
 
         private void OnPlayButtonClicked()
         {
-            if(!_active) return;
-            MenuActionPerformed?.Invoke(MainMenuAction.Play);
+            if (!_active) return;
+            MenuActionPerformed?.Invoke(MainMenuAction.NewGame);
         }
-    }
-
-    public enum MainMenuAction
-    {
-        Play,
-        Continue,
-        Settings,
-        Quit
     }
 }
