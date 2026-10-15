@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Source.Scripts.Services.AudioService;
 using Source.Scripts.Services.SavingService;
@@ -15,21 +17,29 @@ namespace Source.Scripts.Services.Settings
         private readonly IAudioService _audioService;
         private readonly DefaultGameSettingsConfig _defaultGameSettingsConfig;
         private SettingsSaveContainer _settingsSaveContainer;
+
+        private DeviceData _deviceData;
         private UniTaskCompletionSource _isInitialized = new UniTaskCompletionSource();
 
         public UniTaskCompletionSource Initialized => _isInitialized;
 
+        public DeviceData GetDeviceData() => _deviceData;
+
+        public SettingData GetCurrentSettings() => _settingsSaveContainer.Data;
+
         [Inject]
-        public SettingsService(ISavingService savingService, DefaultGameSettingsConfig defaultGameSettingsConfig, IAudioService audioService)
+        public SettingsService(ISavingService savingService, DefaultGameSettingsConfig defaultGameSettingsConfig,
+            IAudioService audioService)
         {
             _savingService = savingService;
-            _audioService =  audioService;
+            _audioService = audioService;
             _defaultGameSettingsConfig = defaultGameSettingsConfig;
         }
 
         public void Initialize()
         {
             Debug.Log($"[{nameof(ISettingsProvider)}] initializing.");
+            InitializeDeviceData();
             if (_savingService.CheckSaves(SavePath.GAME_SETTINGS))
                 LoadSaveSettings();
             else
@@ -48,20 +58,20 @@ namespace Source.Scripts.Services.Settings
 
         public void SetScreenSettings(Vector2Int resolution, FullScreenMode mode)
         {
-            _settingsSaveContainer.ScreenResolution = resolution;
-            _settingsSaveContainer.WindowMode = mode;
+            _settingsSaveContainer.Data.ScreenResolution = resolution;
+            _settingsSaveContainer.Data.WindowMode = mode;
             Screen.SetResolution(resolution.x, resolution.y, mode);
         }
 
         public void SetMaxFrameRate(int frameRate)
         {
-            _settingsSaveContainer.MaxFrameRate = frameRate;
+            _settingsSaveContainer.Data.MaxFrameRate = frameRate;
             Application.targetFrameRate = frameRate;
         }
 
         public void SetVsync(bool vsync)
         {
-            _settingsSaveContainer.Vsync = vsync;
+            _settingsSaveContainer.Data.Vsync = vsync;
             QualitySettings.vSyncCount = vsync ? 1 : 0;
         }
 
@@ -72,17 +82,17 @@ namespace Source.Scripts.Services.Settings
             {
                 case AudioType.GlobalVolume:
                 {
-                    _settingsSaveContainer.GlobalVolume = volume;
+                    _settingsSaveContainer.Data.GlobalVolume = volume;
                     break;
                 }
                 case AudioType.MusicVolume:
                 {
-                    _settingsSaveContainer.MusicVolume = volume;
+                    _settingsSaveContainer.Data.MusicVolume = volume;
                     break;
                 }
                 case AudioType.SfxVolume:
                 {
-                    _settingsSaveContainer.SfxVolume = volume;
+                    _settingsSaveContainer.Data.SfxVolume = volume;
                     break;
                 }
             }
@@ -90,7 +100,48 @@ namespace Source.Scripts.Services.Settings
 
         public void SetNSFW(bool enable)
         {
-            _settingsSaveContainer.NSFW = enable;
+            _settingsSaveContainer.Data.NSFW = enable;
+        }
+
+        private void InitializeDeviceData()
+        {
+            Debug.Log($"[{nameof(ISettingsProvider)}] {nameof(InitializeDeviceData)}.");
+
+            var availableScreenRes = new HashSet<Vector2Int>();
+            var screenResolutionSet = new HashSet<Vector2Int>();
+            var frameRateSet = new HashSet<double>();
+            
+            foreach (var res in _defaultGameSettingsConfig.AvailableScreenResolution)
+            {
+                availableScreenRes.Add(res);
+            }
+      
+            foreach (var data in Screen.resolutions)
+            {
+                var screenRes = new Vector2Int(data.width, data.height);
+                if(availableScreenRes.Contains(screenRes))
+                    screenResolutionSet.Add(screenRes);
+                if(data.refreshRateRatio.value>= _defaultGameSettingsConfig.MinRefreshRate)
+                    frameRateSet.Add(data.refreshRateRatio.value);
+            }
+
+            _deviceData = new DeviceData()
+            {
+                ScreenResolution = screenResolutionSet.ToArray(),
+                RefreshRate = frameRateSet.ToArray(),
+            };
+
+            Debug.Log($"Available screen resolutions = {_deviceData.ScreenResolution.Length}");
+            foreach (var res in _deviceData.ScreenResolution)
+            {
+                Debug.Log($"Resolutions = {res}");
+            }
+            
+            Debug.Log($"Available screen refreshRAte = {_deviceData.RefreshRate.Length}");
+            foreach (var res in _deviceData.RefreshRate)
+            {
+                Debug.Log($"RefreshRate = {res}hz");
+            }
         }
 
         private void ApplyDefaultSettings()
@@ -106,7 +157,7 @@ namespace Source.Scripts.Services.Settings
             {
                 screenResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
             }
-            
+
             SetScreenSettings(screenResolution, _defaultGameSettingsConfig.WindowMode);
             SetMaxFrameRate(_defaultGameSettingsConfig.MaxFrameRate);
             SetVsync(_defaultGameSettingsConfig.Vsync);
@@ -115,8 +166,8 @@ namespace Source.Scripts.Services.Settings
             SetVolume(AudioType.SfxVolume, _defaultGameSettingsConfig.SfxVolume);
             SetNSFW(_defaultGameSettingsConfig.NSFW);
 
-            _savingService.Save(SavePath.GAME_SETTINGS, _settingsSaveContainer);
-            _isInitialized.TrySetResult();
+            SaveSettings();
+            FinishInitialization().Forget();
         }
 
         private void LoadSaveSettings()
@@ -128,14 +179,20 @@ namespace Source.Scripts.Services.Settings
                 return;
             }
 
-            SetScreenSettings(_settingsSaveContainer.ScreenResolution, _settingsSaveContainer.WindowMode);
-            SetMaxFrameRate(_settingsSaveContainer.MaxFrameRate);
-            SetVsync(_settingsSaveContainer.Vsync);
-            SetVolume(AudioType.GlobalVolume, _settingsSaveContainer.GlobalVolume);
-            SetVolume(AudioType.MusicVolume, _settingsSaveContainer.MusicVolume);
-            SetVolume(AudioType.SfxVolume, _settingsSaveContainer.SfxVolume);
-            SetNSFW(_settingsSaveContainer.NSFW);
+            SetScreenSettings(_settingsSaveContainer.Data.ScreenResolution, _settingsSaveContainer.Data.WindowMode);
+            SetMaxFrameRate(_settingsSaveContainer.Data.MaxFrameRate);
+            SetVsync(_settingsSaveContainer.Data.Vsync);
+            SetVolume(AudioType.GlobalVolume, _settingsSaveContainer.Data.GlobalVolume);
+            SetVolume(AudioType.MusicVolume, _settingsSaveContainer.Data.MusicVolume);
+            SetVolume(AudioType.SfxVolume, _settingsSaveContainer.Data.SfxVolume);
+            SetNSFW(_settingsSaveContainer.Data.NSFW);
 
+            FinishInitialization().Forget();
+        }
+
+        private async UniTaskVoid FinishInitialization()
+        {
+            await UniTask.WaitForFixedUpdate();
             _isInitialized.TrySetResult();
         }
     }

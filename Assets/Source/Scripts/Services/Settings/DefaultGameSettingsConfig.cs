@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Source.Scripts.Services.Settings
@@ -13,5 +14,7 @@ namespace Source.Scripts.Services.Settings
         [field: SerializeField] [Range(0f, 1f)] public float MusicVolume { get; private set; }
         [field: SerializeField] [Range(0f, 1f)] public float SfxVolume { get; private set; }
         [field: SerializeField] public bool NSFW { get; private set; }
+        [field: SerializeField] public List<Vector2Int> AvailableScreenResolution { get; private set; }
+        [field: SerializeField] public int MinRefreshRate { get; private set; }
     }
 }

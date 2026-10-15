@@ -12,5 +12,7 @@ namespace Source.Scripts.Services.Settings
         void SetVsync(bool vsync);
         void SetVolume(AudioType audioType,float volume);
         void SetNSFW(bool enable);
+        DeviceData GetDeviceData();
+        SettingData GetCurrentSettings();
     }
 }

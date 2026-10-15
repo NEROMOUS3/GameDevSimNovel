@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3240248790357265371}
   - component: {fileID: 6272019065179602646}
-  - component: {fileID: 6308309401816239834}
   m_Layer: 5
   m_Name: MainMenuView
   m_TagString: Untagged
@@ -55,20 +54,6 @@ MonoBehaviour:
   _continue: {fileID: 3264175617880556312}
   _settings: {fileID: 3532637807725466186}
   _quitButton: {fileID: 8495621708285715886}
---- !u!114 &6308309401816239834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384337486167829568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
 --- !u!1 &2562510941379273583
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -224.5, y: -21}
-  m_SizeDelta: {x: 1980.161, y: 1080}
+  m_AnchoredPosition: {x: -615, y: -83}
+  m_SizeDelta: {x: 3960.3225, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1143348609222585483
 CanvasRenderer:
@@ -254,8 +239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 254.45, y: 0}
-  m_SizeDelta: {x: 508.9, y: 0}
+  m_AnchoredPosition: {x: 319, y: -0.10998535}
+  m_SizeDelta: {x: 642, y: 30.919912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7373440953994714625
 CanvasRenderer:
